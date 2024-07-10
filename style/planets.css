@@ -1,0 +1,366 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background: url('/images/background-body.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* HEADER CSS */
+
+header {
+    border-bottom: 2px solid white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+header .logo img {
+    height: 80px;
+    margin: 15px 15px 0 ;
+}
+
+header nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+header nav ul li {
+    margin-left: 20px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    transition: 0.3s;
+    text-transform: uppercase;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+header nav ul li a:hover {
+    color:#FAD201;
+}
+
+.home{
+    display: flex;
+    height: 100vh;
+}
+
+/* SIDEBAR CSS */
+
+.home .sidebar {
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 30px;
+}
+
+.home .sidebar .sidebar-item {
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.home .sidebar .sidebar-item:nth-child(1) {
+    text-align: center;
+    color: #FAD201;
+    text-decoration: none;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.home .sidebar .sidebar-item:hover{
+    color: #FAD201;
+}
+
+.home .sidebar .sidebar-item i {
+    margin-bottom: 5px;
+}
+
+.home .sidebar .sidebar-item span {
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* MAIN CSS */
+
+.home .main{
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    width: 100%;
+    gap: 50px;
+}
+
+/* PLANETE PAGE CSS */
+
+.home .main-planets{
+    display: flex;
+    padding: 50px;
+    width: 100%;
+    gap: 50px;
+}
+
+.home .main-planets .planets {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid white;
+    width: 50%;
+    min-width: 400px;
+    height: 620px;
+}
+
+.home .main-planets .planets::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-image: url(/images/background-3.jpg);
+    background-position: center left;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    filter: brightness(40%);
+    z-index: 0;
+}
+
+.home .main-planets .planets h1{
+    position: relative;
+    z-index: 1;
+    color: white;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.home .main-planets .planets .filters {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.home .main-planets .planets .filters label {
+    position: relative;
+    z-index: 1;
+    font-weight: bold;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.home .main-planets .planets .filters select, input[type="text"] {
+    position: relative;
+    z-index: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #FAD201;
+    color: #FAD201;
+    border-radius: 4px;
+    width: 200px;
+    background-color: black;
+}
+
+.home .main-planets .planets .filters #search-input::placeholder {
+    color: #FAD201;
+}
+
+.home .main-planets .planets .title-table{
+    position: relative;
+    z-index: 1;
+    color: #FAD201;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    margin: 30px 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.home .main-planets .planets table {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.home .main-planets .planets table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #FAD201;
+    padding: 20px;
+}
+
+.home .main-planets .planets table th {
+    color: #FAD201;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.home .main-planets .planets table tbody tr{
+    color: #FAD201;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.home .main-planets .planets table tbody tr:hover {
+    background-color: #FAD201;
+    color: black;
+}
+
+.home .main-planets .planets .selected {
+    background-color: #f0f0f0;
+}
+
+.home .main-planets .planets .cadre-table-scroll {
+    display: inline-block;
+    height: 20em;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+.home .main-planets .planets .table-scroll thead th {
+    position: sticky;
+    top: 0;
+}
+
+.home .main-planets .planets .table-scroll tfoot td {
+    position: sticky;
+    bottom: 0;
+}
+
+.home .main-planets .planets table th, table td:nth-child(2) {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #FAD201;
+    padding: 20px;
+    text-align: right;
+}
+
+.home .main-planets .planets .total-planets {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    margin: 20px 20px;
+    gap: 5px;
+}
+
+.home .main-planets .planets .total-planets .title-result{
+    position: relative;
+    z-index: 1;
+    color: #FAD201;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.home .main-planets .planets .result{
+    position: relative;
+    z-index: 1;
+    color: #FAD201;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    display: flex;
+}
+
+.home .main-planets .planet {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid white;
+    width: 50%;
+    min-width: 400px;
+    height: 620px;
+}
+
+.home .main-planets .planet::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-image: url(/images/background-4.jpeg);
+    background-position: center left;
+    background-size: 150%;
+    background-repeat: no-repeat;
+    filter: brightness(40%);
+    z-index: 0;
+}
+
+.home .main-planets .planet h2{
+    position: relative;
+    z-index: 1;
+    color: white;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.home .main-planets .planet .planet-name{
+    position: relative;
+    z-index: 1;
+    color: #FAD201;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.home .main-planets .planet .population-planet{
+    position: relative;
+    z-index: 1;
+    color: #FAD201;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    display: flex;
+    gap: 5px;
+}
+
+.home .main-planets .planet .planet-data{
+    position: relative;
+    z-index: 1;
+    color: #FAD201;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+
+.home .main-planets .planet .planet-data .planet-text{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/vehicules.css">
+    <link rel="stylesheet" href="/style/reset.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Star Wars Véhicules</title>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logotype.png" alt="Logo">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="#">Prochaine mission</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <!-- MAIN -->
+
+    <section class="home">
+
+        <!-- SIDEBAR -->
+        <article class="sidebar">
+            <a href="planets.html" class="sidebar-item">
+                <i class="fa-brands fa-galactic-republic fa-2x"></i>
+                <span>Planètes</span>
+            </a>
+            <a href="vehicules.html" class="sidebar-item">
+                <i class="fa-brands fa-galactic-senate fa-2x"></i>
+                <span>Véhicules</span>
+            </a>
+            <a href="people.html" class="sidebar-item">
+                <i class="fa-solid fa-jedi fa-2x"></i>
+                <span>Personnes</span>
+            </a>
+        </article>
+
+        <article class="main-vehicles">
+            <div class="vehicles">
+                <h1>Véhicules</h1>
+                <div class="filters">
+                    <select class="vehicle-select"></select>
+                    <input type="text" class="search-input" placeholder="Rechercher...">
+                </div>
+                <div class="title-table">
+                    <h2>Véhicule</h2>
+                    <h2>Modèle</h2>
+                    <h2>Classe</h2>
+                </div>
+                <div class="table-scroll">
+                    <table>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="total-vehicles">            
+                    <p class="title-result">Nombre total de véhicules :</p>
+                    <p class="result"></p>
+                </div>
+            </div>
+
+            <div class="vehicle-details">
+                <h2>Détails du véhicule :</h2>
+                <p class="vehicle-name"></p>
+                <p class="vehicle-model"></p> <!-- Ajouté -->
+                <div class="vehicle-data">
+                    <i class="fa-solid fa-user-astronaut fa-2x"></i>
+                    <div class="vehicle-text">
+                        <p>Nombre de passagers:</p>
+                        <p class="vehicle-passengers"></p>
+                    </div>
+                </div>
+                <div class="vehicle-data">
+                    <i class="fa-solid fa-coins fa-2x"></i>
+                    <div class="vehicle-text">
+                        <p>Coût en crédit:</p>
+                        <p class="vehicle-cost"></p>
+                    </div>
+                </div>
+                <div class="vehicle-data">
+                    <i class="fa-solid fa-box fa-2x"></i>
+                    <div class="vehicle-text">
+                        <p>Capacité de chargement:</p>
+                        <p class="vehicle-capacity"></p>
+                    </div>
+                </div>
+                <div class="vehicle-data">
+                    <i class="fa-solid fa-industry fa-2x"></i>
+                    <div class="vehicle-text">
+                        <p>Fabricant:</p>
+                        <p class="vehicle-manufacturer"></p>
+                    </div>
+                </div>
+            </div>
+            
+        </article>
+    </section>
+    <script src="JS/vehicules.js"></script>
+</body>
+</html>

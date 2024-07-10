@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/planets.css">
+    <link rel="stylesheet" href="/style/reset.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Star Wars Planètes</title>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logotype.png" alt="Logo">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="#">Prochaine mission</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <!-- MAIN -->
+
+    <section class="home">
+
+        <!-- SUDEBAR -->
+        <article class="sidebar">
+            <a href="planets.html" class="sidebar-item">
+                <i class="fa-brands fa-galactic-republic fa-2x"></i>
+                <span>Planètes</span>
+            </a>
+            <a href="vehicules.html" class="sidebar-item">
+                <i class="fa-brands fa-galactic-senate fa-2x"></i>
+                <span>Véhicules</span>
+            </a>
+            <a href="people.html" class="sidebar-item">
+                <i class="fa-solid fa-jedi fa-2x"></i>
+                <span>Personnes</span>
+            </a>
+        </article>
+
+        <article class="main-planets">
+            <div class="planets">
+                <h1>Planètes</h1>
+                <div class="filters">
+                    <select class="planet-select"></select>
+                    <input type="text" class="search-input" placeholder="Rechercher...">
+                </div>
+                <div class="title-table">
+                    <h2>Planète</h2>
+                    <h2>Terrain</h2>
+                </div>
+                <div class="cadre-table-scroll">
+                    <table class="table-scroll">
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="total-planets">            
+                    <p class="title-result">Nombre total de planètes :</p>
+                    <p class="result"></p>
+                </div>
+            </div>
+
+            <div class="planet">
+                <h2>Données de l'étoile :</h2>
+                <p class="planet-name"></p>
+                <div class="population-planet">
+                    <p>Population: </p><p class="planet-population"></p>
+                </div>
+                <div class="planet-data">
+                    <i class="fa-regular fa-circle fa-2x"></i>
+                    <div class="planet-text">
+                        <p>Diamètre:</p>
+                        <p class="planet-diameter"></p>
+                    </div>
+                </div>
+                <div class="planet-data">
+                    <i class="fa-solid fa-temperature-three-quarters fa-2x"></i>
+                    <div class="planet-text">
+                        <p>Climat:</p>
+                        <p class="planet-climat"></p>
+                    </div>
+                </div>
+                <div class="planet-data">
+                    <i class="fa-solid fa-magnet fa-2x"></i>
+                    <div class="planet-text">
+                        <p>Gravité:</p>
+                        <p class="planet-gravity"></p>
+                    </div>
+                </div>
+                <div class="planet-data">
+                    <i class="fa-solid fa-tree fa-2x"></i>
+                    <div class="planet-text">
+                        <p>Terrain:</p>
+                        <p class="planet-terrain"></p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    <script src="JS/planets.js"></script>
+</body>
+</html>

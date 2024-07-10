@@ -1,0 +1,274 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background: url('/images/background-body.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* HEADER CSS */
+
+header {
+    border-bottom: 2px solid white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+header .logo img {
+    height: 80px;
+    margin: 15px 15px 0 ;
+}
+
+header nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+header nav ul li {
+    margin-left: 20px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    transition: 0.3s;
+    text-transform: uppercase;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+header nav ul li a:hover {
+    color:#FAD201;
+}
+
+.home{
+    display: flex;
+    height: 100vh;
+}
+
+/* SIDEBAR CSS */
+
+.home .sidebar {
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 30px;
+}
+
+.home .sidebar .sidebar-item {
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.home .sidebar .sidebar-item:hover{
+    color: #FAD201;
+}
+
+.home .sidebar .sidebar-item i {
+    margin-bottom: 5px;
+}
+
+.home .sidebar .sidebar-item span {
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* MAIN CSS */
+
+.home .main{
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    width: 100%;
+    gap: 50px;
+}
+
+/* A PROPOS CSS */
+
+.home .main .about{
+    position: relative;
+    overflow: hidden;
+    border: 1px solid white;
+    margin: 0 auto;
+    width: 100%;
+    min-width: 800px;
+    padding: 50px 0;
+}
+
+.home .main .about::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(/images/background-2.jpg);
+    background-position: center;
+    background-size: 100% auto;
+    filter: brightness(40%);
+    z-index: 0;
+}
+
+.home .main .about h1{
+    color: #FAD201;
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+.home .main .about p{
+    color: #ffffff;
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.home .main .about p span{
+    color: #FAD201;
+    z-index: 1;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.home .main .about p span:hover{
+    color: #ffffff;
+}
+
+.home .main .about button {
+    position: relative;
+    z-index: 1;
+    background-color: #000000;
+    color: #FAD201; 
+    border: 2px solid #FAD201;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin: 20px;
+    transition: 0.3s;
+}
+
+.home .main .about button:hover {
+    background-color: #FAD201;
+    border-color: #FAD201;
+    color: #000000;
+}
+
+/* LES CHIFFRES CSS */
+
+.home .main .number{
+    position: relative;
+    overflow: hidden;
+    border: 1px solid white;
+    margin: 0 auto;
+    width: 100%;
+    padding: 50px 0;
+    min-width: 800px;
+}
+
+.home .main .number::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(/images/background-1.jpg);
+    background-position: center;
+    background-size: 100% auto;
+    filter: brightness(40%);
+    z-index: 0;
+}
+
+.home .main .number h2{
+    color: #FAD201;
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+.home .main .number p{
+    color: #ffffff;
+    position: relative;
+    z-index: 1;
+    padding: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+
+.home .main .number p{
+    color: #ffffff;
+    position: relative;
+    z-index: 1;
+    padding: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+
+.home .main .number .section-data{
+    display: flex;
+    position: relative;
+    z-index: 1;
+}
+
+.home .main .number .section-data .data{
+    display: flex;
+    margin: 20px;
+}
+
+.home .main .number .section-data .data i{
+    color: #ffffff;
+}
+
+.home .main .number .section-data .fa-solid, .fas {
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+}
+
+.home .main .number .section-data .data .data-text{
+    display: flex;
+    flex-direction: column;
+}
+
+.home .main .number .section-data .data .data-text h3{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    padding: 0 16px;
+    color: #FAD201;
+}
+
+.home .main .number .section-data .data .data-text p{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    color: #ffffff;
+    padding: 16px;
+}
