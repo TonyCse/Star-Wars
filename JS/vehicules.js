@@ -1,131 +1,119 @@
-const vehicleSelect = document.querySelector('.vehicle-select');
-const searchInput = document.querySelector('.search-input');
-const tbody = document.querySelector('.table-scroll tbody');
-
-// DATA DU VEHICULE SELECTIONNE
-const vehicleName = document.querySelector('.vehicle-name');
-const vehicleModel = document.querySelector('.vehicle-model');
-const vehicleClass = document.querySelector('.vehicle-class');
-const vehiclePassengers = document.querySelector('.vehicle-passengers');
-const vehicleCost = document.querySelector('.vehicle-cost');
-const vehicleCapacity = document.querySelector('.vehicle-capacity');
-const vehicleManufacturer = document.querySelector('.vehicle-manufacturer');
-
-// RESULTAT TOTAL DES VEHICULES
-const resultCount = document.querySelector('.result');
 let vehiclesData = [];
 
 // RECUPERATION DES DONNEES
 async function fetchVehicles() {
-    
+
     const url = 'https://swapi.dev/api/vehicles/';
+
     try {
         let nextUrl = url;
-
         while (nextUrl) {
-            const res = await fetch(nextUrl);
-            const data = await res.json();
-
+            const data = await fetchData(nextUrl);
             vehiclesData = vehiclesData.concat(data.results);
             nextUrl = data.next;
         }
 
-        vehiSelect(vehiclesData);
-        vehiTable(vehiclesData);
-        vehiResultCount(vehiclesData.length);
+        displayUI();
 
     } catch (error) {
-        console.error('Erreur, aucun véhicule en orbite', error);
+        console.error('Erreur, L\'étoile noire a déjà tout détruit ici', error);
+    }
+}
+
+// AFFICHAGE DE L'INTERFACE
+function displayUI() {
+
+    filterSelect();
+    updateTable(vehiclesData);
+    updateResultCount(vehiclesData.length);
+    filterSearch();
+
+}
+
+// MISE EN PLACE DU FILTER
+function filterSelect() {
+
+    const costRanges = [
+        { label: 'Filtrer par coût', min: -1, max: -1 },
+        { label: '0 à 10 000', min: 0, max: 10000 },
+        { label: '10 000 à 100 000', min: 10000, max: 100000 },
+        { label: '+100 000', min: 100000, max: Infinity }
+    ];
+
+    costRanges.forEach(range => {
+        const option = createOption(JSON.stringify(range), range.label);
+        vehicleSelect.appendChild(option);
+    });
+
+    vehicleSelect.addEventListener('change', selectChange);
+
+}
+
+// VERIFICATION DU CHANGEMENT SELECT ET MISE A JOUR DU TABLEAU + RESULTAT TOTAL
+function selectChange() {
+    const selectedOption = vehicleSelect.value;
+    let filteredVehicles = [];
+
+    try {
+        const selectedRange = JSON.parse(selectedOption);
+        filteredVehicles = vehiclesData.filter(vehicle => {
+            const cost = parseInt(vehicle.cost_in_credits);
+            return !isNaN(cost) && cost >= selectedRange.min && cost <= selectedRange.max;
+        });
+    } catch (e) {
+        filteredVehicles = vehiclesData;
     }
 
+    updateTable(filteredVehicles);
+    updateResultCount(filteredVehicles.length);
+    
 }
 
-// AFFICHAGE DE LA LISTE DE TOUS LES VEHICULES DANS LE SELECT
-function vehiSelect(vehicles) {
+// MISE EN PLACE DE LA FONCTION RECHERCHE
+function filterSearch() {
 
-    vehicles.forEach(vehicle => {
-        const option = document.createElement('option');
-        option.value = vehicle.name;
-        option.textContent = vehicle.name;
-        vehicleSelect.appendChild(option);
+    vehicleSearchInput.addEventListener('input', function() {
+        const searchTerm = vehicleSearchInput.value.trim().toLowerCase();
+        const filteredVehicles = vehiclesData.filter(vehicle => {
+            return vehicle.name.toLowerCase().includes(searchTerm);
+        });
 
-    });
-
-    // AJOUT D'UN ECOUTEUR SUR LE SELECT POUR AFFICHER DYNAMIQUEMENT LE VEHICULE DANS LE TABLEAU
-    vehicleSelect.addEventListener('change', () => {
-
-        const selectedVehicleName = vehicleSelect.value;
-        const selectedVehicle = vehicles.find(vehicle => vehicle.name === selectedVehicleName);
-        
-        if (selectedVehicle) {
-            vehiTable([selectedVehicle]);
-        }
+        updateTable(filteredVehicles);
+        updateResultCount(filteredVehicles.length);
 
     });
 }
 
-// MISE EN PLACE DE LA FONCTION RECHERCHE ET DU FILTRE
-searchInput.addEventListener('input', function() {
+// MISE EN PLACE DU RAFRAICHISSEMENT DU TABLEAU
+function updateTable(vehicles) {
 
-    const searchTerm = searchInput.value.trim().toLowerCase();
-    const filteredVehicles = vehiclesData.filter(vehicle => {
-        return vehicle.name.toLowerCase().includes(searchTerm);
-    });
-
-    vehiTable(filteredVehicles);
-    vehiResultCount(filteredVehicles.length);
-
-});
-
-// AFFICHAGE DE LA LISTE DE TOUS LES VEHICULES DANS LE TABLEAU
-function vehiTable(vehicles) {
-
-    tbody.textContent = '';
+    clearTableBody(vehiclesTableBody);
 
     vehicles.forEach(vehicle => {
-        const row = document.createElement('tr');
-
-        const nameCell = document.createElement('td');
-        nameCell.textContent = vehicle.name;
-        row.appendChild(nameCell);
-
-        const modelCell = document.createElement('td');
-        modelCell.textContent = vehicle.model;
-        row.appendChild(modelCell);
-
-        const classCell = document.createElement('td');
-        classCell.textContent = vehicle.vehicle_class;
-        row.appendChild(classCell);
-
-        tbody.appendChild(row);
+        const row = createTableRow([vehicle.name, capitalizeFirstLetter(vehicle.model), capitalizeFirstLetter(vehicle.vehicle_class)]);
+        vehiclesTableBody.appendChild(row);
 
         row.addEventListener('click', () => {
             displayVehicleDetails(vehicle);
         });
     });
-
 }
 
-// AFFICHAGE DU NOMBRE TOTAL DE VEHICULES
-function vehiResultCount(count) {
-
-    resultCount.textContent = count;
-
+// MISE EN PLACE DU RAFRAICHISSEMENT DU RESULTAT TOTAL
+function updateResultCount(count) {
+    updateTextContent('.result', count);
 }
 
-// AFFICHAGE DES DONNEES DU VEHICULE SELECTIONNE
+// AFFICHAGE DES DONNEES DU VEHICULE
 function displayVehicleDetails(vehicle) {
 
-    console.log(vehicle);
-    if (vehicleName) vehicleName.textContent = vehicle.name || '';
-    if (vehicleModel) vehicleModel.textContent = vehicle.model || '';
-    if (vehicleClass) vehicleClass.textContent = vehicle.vehicle_class || '';
-    if (vehiclePassengers) vehiclePassengers.textContent = vehicle.passengers || '';
-    if (vehicleCost) vehicleCost.textContent = vehicle.cost_in_credits || '';
-    if (vehicleCapacity) vehicleCapacity.textContent = vehicle.cargo_capacity || '';
-    if (vehicleManufacturer) vehicleManufacturer.textContent = vehicle.manufacturer || '';
+    console.log(vehicle)
+    updateTextContent('.vehicle-name', vehicle.name);
+    updateTextContent('.vehicle-passengers', vehicle.passengers);
+    updateTextContent('.vehicle-cost', capitalizeFirstLetter(vehicle.cost_in_credits));
+    updateTextContent('.vehicle-capacity', vehicle.cargo_capacity);
+    updateTextContent('.vehicle-manufacturer', vehicle.manufacturer);
 
 }
 
-// APPEL DE LA FONCTION POUR RECUPERER ET AFFICHER LES DONNEES AU CHARGEMENT DE LA PAGE
 fetchVehicles();

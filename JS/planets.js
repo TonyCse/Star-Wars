@@ -1,127 +1,112 @@
-// DATA SELECT INPUT ET TABLE
-const planetSelect = document.querySelector('.planet-select');
-const searchInput = document.querySelector('.search-input');
-const tbody = document.querySelector('.table-scroll tbody');
-
-// DATA DE LA PLANETE SELECTIONNEE
-const planetName = document.querySelector('.planet-name');
-const planetPopulation = document.querySelector('.planet-population');
-const planetDiameter = document.querySelector('.planet-diameter');
-const planetClimate = document.querySelector('.planet-climat');
-const planetGravity = document.querySelector('.planet-gravity')
-const planetTerrain = document.querySelector('.planet-terrain');
-
-// RESULTAT TOTAL DES PLANETES
-const resultCount = document.querySelector('.result');
 let planetsData = [];
 
 // RECUPERATION DES DATA
 async function fetchPlanets() {
-
     const url = 'https://swapi.dev/api/planets/';
+
     try {
         let nextUrl = url;
-
         while (nextUrl) {
-            const res = await fetch(nextUrl);
-            const data = await res.json();
-
+            const data = await fetchData(nextUrl);
             planetsData = planetsData.concat(data.results);
             nextUrl = data.next;
         }
 
-        plaSelect(planetsData);
-        plaTable(planetsData);
-        plaResultCount(planetsData.length);
+        displayUI();
 
     } catch (error) {
         console.error('Erreur, L\'étoile noire a déjà tout détruit ici', error);
     }
 }
 
-// AFFICHAGE DE LA LISTE DE TOUTES LES PLANETES RECUPEREES DANS LE SELECT
-function plaSelect(planets) {
+// AFFICHAGE DE L'INTERFACE
+function displayUI() {
+    filterSelect();
+    updateTable(planetsData);
+    updateResultCount(planetsData.length);
+    filterSearch();
+}
 
-    planets.forEach(planet => {
+// MISE EN PLACE DU FILTER
+function filterSelect() {
+    const populationOptions = [
+        { label: 'Filtrer par population', min: -1, max: -1 },
+        { label: '0 à 100 000', min: 0, max: 100000 },
+        { label: '100 000 à 100 000 000', min: 100000, max: 100000000 },
+        { label: '+100 000 000', min: 100000000, max: Infinity }
+    ];
 
-        const option = document.createElement('option');
-        option.value = planet.name;
-        option.textContent = planet.name;
+    populationOptions.forEach(selectOption => {
+        const option = createOption(JSON.stringify(selectOption), selectOption.label);
         planetSelect.appendChild(option);
-
     });
 
-    // AJOUT D'UN ECOUTEUR SUR LE SELECT AFIN D'AFFICHER DYNAMIQUEMENT LA PLANETE DANS LE TABLEAU
-    planetSelect.addEventListener('change', () => {
+    planetSelect.addEventListener('change', selectChange);
+}
 
-        const selectedPlanetName = planetSelect.value;
-        const selectedPlanet = planets.find(planet => planet.name === selectedPlanetName);
-        
-        if (selectedPlanet) {
-            plaTable([selectedPlanet]);
-        }
+// VERFICATION DU CHANGEMENT SELECT ET MISE A JOUR DU TABLEAU + RESULTAT TOTAL
+function selectChange() {
+    const selectedOption = planetSelect.value;
+    let filteredPlanets = [];
 
+    try {
+        const selectedRange = JSON.parse(selectedOption);
+        filteredPlanets = planetsData.filter(planet => {
+            const population = parseInt(planet.population);
+            return !isNaN(population) && population >= selectedRange.min && population <= selectedRange.max;
+        });
+    } catch (e) {
+        filteredPlanets = planetsData;
+    }
+
+    updateTable(filteredPlanets);
+    updateResultCount(filteredPlanets.length);
+    
+}
+
+// MISE EN PLACE DE LA FONCTION RECHERCHE
+function filterSearch() {
+    searchInput.addEventListener('input', function() {
+        const searchTerm = searchInput.value.trim().toLowerCase();
+        const filteredPlanets = planetsData.filter(planet => {
+            return planet.name.toLowerCase().includes(searchTerm);
+        });
+
+        updateTable(filteredPlanets);
+        updateResultCount(filteredPlanets.length);
     });
 }
 
-// MISE EN PLACE DE LA FONCTION RECHERCHE ET DU FILTRE
-searchInput.addEventListener('input', function() {
-
-    const searchTerm = searchInput.value.trim().toLowerCase();
-    const filteredPlanets = planetsData.filter(planet => {
-        return planet.name.toLowerCase().includes(searchTerm);
-    });
-
-    plaTable(filteredPlanets);
-    plaResultCount(filteredPlanets.length);
-
-});
-
-// AFFICHAGE DE LA LISTE DE TOUTES LES PLANETES RECUPEREES DANS LE TABLEAU
-function plaTable(planets) {
-
-    tbody.textContent = '';
+// MISE EN PLACE DU RAFRAICHISSEMENT DU TABLEAU
+function updateTable(planets) {
+    clearTableBody(tbody);
 
     planets.forEach(planet => {
-
-        const row = document.createElement('tr');
-
-        const nameCell = document.createElement('td');
-        nameCell.textContent = planet.name;
-        row.appendChild(nameCell);
-
-        const terrainCell = document.createElement('td');
-        terrainCell.textContent = planet.terrain;
-        row.appendChild(terrainCell);
-
+        const row = createTableRow([planet.name, capitalizeFirstLetter(planet.terrain)]);
         tbody.appendChild(row);
 
         row.addEventListener('click', () => {
             displayPlanetDetails(planet);
         });
-
     });
 }
 
-// AFFICHAGE DU NOMBRE DE PLANETES TOTALE
-function plaResultCount(count) {
-
-    resultCount.textContent = count;
-
+// MISE EN PLACE DU RAFRAICHISSEMENT DU RESULTAT TOTAL
+function updateResultCount(count) {
+    updateTextContent('.result', count);
 }
 
-// AFFICHAGE DES DATA DE LA PLANETE SELECTIONNEE
+// AFFICHAGE DES DATA DE LA PLANET
 function displayPlanetDetails(planet) {
 
-    console.log(planet)
-    planetName.textContent = planet.name;
-    planetPopulation.textContent = planet.population;
-    planetDiameter.textContent = planet.diameter;
-    planetClimate.textContent = planet.climate;
-    planetGravity.textContent = planet.gravity;
-    planetTerrain.textContent = planet.terrain;
+    console.log(planet);
+    updateTextContent('.planet-name', planet.name);
+    updateTextContent('.planet-population', planet.population);
+    updateTextContent('.planet-diameter', planet.diameter);
+    updateTextContent('.planet-climat', capitalizeFirstLetter(planet.climate));
+    updateTextContent('.planet-gravity', planet.gravity);
+    updateTextContent('.planet-terrain', capitalizeFirstLetter(planet.terrain));
 
 }
 
-// APPEL DE LA FUNCTION AFIN D'AFFICHER LES DATA AU CHARGEMENT DE LA PAGE
 fetchPlanets();

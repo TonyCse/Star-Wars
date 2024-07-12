@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/people.css">
+    <link rel="stylesheet" href="/style/reset.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Star Wars Personnes</title>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logotype.png" alt="Logo">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <section class="home">
+
+        <!-- SIDEBAR -->
+        <article class="sidebar">
+            <a href="planets.html" class="sidebar-item">
+                <i class="fa-brands fa-galactic-republic fa-2x"></i>
+                <span>Planètes</span>
+            </a>
+            <a href="vehicules.html" class="sidebar-item">
+                <i class="fa-brands fa-galactic-senate fa-2x"></i>
+                <span>Véhicules</span>
+            </a>
+            <a href="people.html" class="sidebar-item">
+                <i class="fa-solid fa-jedi fa-2x"></i>
+                <span>Personnes</span>
+            </a>
+        </article>
+
+        <article class="main-peoples">
+            <div class="peoples">
+                <h1>Personnes</h1>
+                <div class="filters">
+                    <select class="peoples-select"></select>
+                    <input type="text" class="search-input" placeholder="Rechercher...">
+                </div>
+                <div class="title-table">
+                    <h2>Nom</h2>
+                    <h2>Taille</h2>
+                </div>
+                <div class="cadre-table-scroll">
+                    <table class="table-scroll">
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="total-peoples">            
+                    <p class="title-result">Nombre total de personnes :</p>
+                    <p class="result"></p>
+                </div>
+            </div>
+
+            <div class="people">
+                <h2>Données de la personne :</h2>
+                <p class="people-name"></p>
+                <div class="people-data">
+                    <p>Genre: <span class="people-gender"></span></p>
+                </div>
+                <div class="people-data">
+                    <p>Taille: <span class="people-height"></span></p>
+                </div>
+                <div class="people-data">
+                    <p>Poids: <span class="people-mass"></span></p>
+                </div>
+                <div class="people-data">
+                    <p>Couleur de cheveux: <span class="people-hair-color"></span></p>
+                </div>
+                <div class="people-data">
+                    <p>Couleur des yeux: <span class="people-eye-color"></span></p>
+                </div>
+            </div>
+        </article>
+    </section>
+    <script src="/JS/api.js"></script>
+    <script src="/JS/dom.js"></script>
+    <script src="/JS/utils.js"></script>
+    <script src="/JS/people.js"></script>
+</body>
+</html>
